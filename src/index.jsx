@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import MainView from './components/main-view/main-view';
 
 // Import statement indicating the need of bundling ./index.scss
 import './index.scss'
@@ -8,9 +9,7 @@ import './index.scss'
 class movieDBapp extends React.Component {
   render() {
     return (
-      <div className="my-flix">
-        <div>Good Morning</div>
-      </div>
+      <MainView />
     );
   }
 }
