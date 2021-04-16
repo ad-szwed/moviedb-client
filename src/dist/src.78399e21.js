@@ -31400,6 +31400,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+console.log(_react.default);
+
 var MovieCard = /*#__PURE__*/function (_React$Component) {
   _inherits(MovieCard, _React$Component);
 
@@ -31416,13 +31418,16 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
+          adam = _this$props.adam,
           onMovieClick = _this$props.onMovieClick;
+      console.log(movie, "movie card");
+      console.log(adam);
       return _react.default.createElement("div", {
         className: "movie-card",
         onClick: function onClick() {
           onMovieClick(movie);
         }
-      }, movie.Title);
+      }, movie.title);
     }
   }]);
 
@@ -31500,13 +31505,13 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Title: "), _react.default.createElement("span", {
         className: "value"
-      }, movies.title)), _react.default.createElement("div", {
+      }, movie.title)), _react.default.createElement("div", {
         className: "movie-description"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Description: "), _react.default.createElement("span", {
         className: "value"
-      }, movies.description)), _react.default.createElement("button", {
+      }, movie.description)), _react.default.createElement("button", {
         onClick: function onClick() {
           onBackClick(null);
         }
@@ -31574,7 +31579,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       selectedMovie: null
     };
     return _this;
-  }
+  } // hook, component
+
 
   _createClass(MainView, [{
     key: "componentDidMount",
@@ -31582,6 +31588,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       _axios.default.get('https://szwedshop-moviedb.herokuapp.com/movies').then(function (response) {
+        console.log(response, "!!response");
+
         _this2.setState({
           movies: response.data
         });
@@ -31603,7 +31611,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       var _this$state = this.state,
           movies = _this$state.movies,
-          selectedMovie = _this$state.selectedMovie;
+          selectedMovie = _this$state.selectedMovie; //ES6, object destructuring:
+      // const movies = this.state.movies;
+      // const selectedMovie = this.state.selectedMovie;
+
       if (selectedMovie) return _react.default.createElement(_movieView.default, {
         movie: selectedMovie,
         onBackClick: function onBackClick(newSelectedMovie) {
@@ -31619,6 +31630,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         return _react.default.createElement(_movieCard.default, {
           key: movie._id,
           movie: movie,
+          adam: "!!adam" //props = key, movie {} - for the variables
+          ,
           onMovieClick: function onMovieClick(newSelectedMovie) {
             _this3.setState({
               selectedMovie: newSelectedMovie
@@ -31796,7 +31809,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55935" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61160" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
