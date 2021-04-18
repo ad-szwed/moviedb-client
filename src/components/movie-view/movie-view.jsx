@@ -1,19 +1,23 @@
 import React from 'react';
-import MovieCard from '../movie-card/movie-card'
+import PropTypes from "prop-types";
 
 export default class MovieView extends React.Component {
 
-  keypressCallback(event) {
-    console.log(event.key);
-  }
+  // key press console logging: {
 
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
-  }
+  // keypressCallback(event) {
+  //   console.log(event.key);
+  // }
 
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
-  }
+  // componentDidMount() {
+  //   document.addEventListener('keypress', this.keypressCallback);
+  // }
+
+  // componentWillUnmount() {
+  // code executed just before the moment the component gets removed from the DOM.
+  //   document.removeEventListener('keypress', this.keypressCallback);
+  // }
+  // }
 
   render() {
     const { movie, onBackClick } = this.props;
@@ -27,6 +31,14 @@ export default class MovieView extends React.Component {
           <span className="label">Title: </span>
           <span className="value">{movie.title}</span>
         </div>
+        <div className="movie-genre">
+          <span className="label">Genre: </span>
+          <span className="value">{movie.genre.name}</span>
+        </div>
+        <div className="movie-director">
+          <span className="label">Director: </span>
+          <span className="value">{movie.director.name}</span>
+        </div>
         <div className="movie-description">
           <span className="label">Description: </span>
           <span className="value">{movie.description}</span>
@@ -36,3 +48,17 @@ export default class MovieView extends React.Component {
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    imgUrl: PropTypes.string.isRequired,
+    genre: PropTypes.shape({
+      name: PropTypes.array.isRequired
+    }),
+    director: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
