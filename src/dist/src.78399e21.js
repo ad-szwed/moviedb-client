@@ -31400,8 +31400,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-console.log(_react.default);
-
 var MovieCard = /*#__PURE__*/function (_React$Component) {
   _inherits(MovieCard, _React$Component);
 
@@ -31418,10 +31416,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
-          adam = _this$props.adam,
           onMovieClick = _this$props.onMovieClick;
-      console.log(movie, "movie card");
-      console.log(adam);
       return _react.default.createElement("div", {
         className: "movie-card",
         onClick: function onClick() {
@@ -31477,21 +31472,32 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MovieView);
 
   function MovieView() {
-    var _this;
-
     _classCallCheck(this, MovieView);
 
-    _this = _super.call(this);
-    _this.state = {};
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(MovieView, [{
+    key: "keypressCallback",
+    value: function keypressCallback(event) {
+      console.log(event.key);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.addEventListener('keypress', this.keypressCallback);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      document.removeEventListener('keypress', this.keypressCallback);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
-          onClick = _this$props.onClick;
+          onBackClick = _this$props.onBackClick;
       return _react.default.createElement("div", {
         className: "movie-view"
       }, _react.default.createElement("div", {
@@ -31588,8 +31594,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       _axios.default.get('https://szwedshop-moviedb.herokuapp.com/movies').then(function (response) {
-        console.log(response, "!!response");
-
         _this2.setState({
           movies: response.data
         });
@@ -31611,7 +31615,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       var _this$state = this.state,
           movies = _this$state.movies,
-          selectedMovie = _this$state.selectedMovie; //ES6, object destructuring:
+          selectedMovie = _this$state.selectedMovie,
+          onBackClick = _this$state.onBackClick; //ES6, object destructuring:
       // const movies = this.state.movies;
       // const selectedMovie = this.state.selectedMovie;
 
@@ -31626,16 +31631,17 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
       return _react.default.createElement("div", {
         className: "main-view"
-      }, movies.map(function (movie) {
+      }, selectedMovie ? _react.default.createElement(_movieView.default, {
+        movie: selectedMovie,
+        onBackClick: function onBackClick(newSelectedMovie) {
+          _this3.setSelectedMovie(newSelectedMovie);
+        }
+      }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.default, {
           key: movie._id,
           movie: movie,
-          adam: "!!adam" //props = key, movie {} - for the variables
-          ,
-          onMovieClick: function onMovieClick(newSelectedMovie) {
-            _this3.setState({
-              selectedMovie: newSelectedMovie
-            });
+          onMovieClick: function onMovieClick(movie) {
+            _this3.setSelectedMovie(movie);
           }
         });
       }));
@@ -31809,7 +31815,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61160" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59559" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

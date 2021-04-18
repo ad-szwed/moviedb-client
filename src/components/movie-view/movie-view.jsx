@@ -3,14 +3,20 @@ import MovieCard from '../movie-card/movie-card'
 
 export default class MovieView extends React.Component {
 
-  constructor() {
-    super();
+  keypressCallback(event) {
+    console.log(event.key);
+  }
 
-    this.state = {};
+  componentDidMount() {
+    document.addEventListener('keypress', this.keypressCallback);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.keypressCallback);
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { movie, onBackClick } = this.props;
 
     return (
       <div className="movie-view">

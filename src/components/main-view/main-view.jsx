@@ -32,21 +32,23 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie } = this.state; //ES6, object destructuring:
+    const { movies, selectedMovie, onBackClick } = this.state; //ES6, object destructuring:
     // const movies = this.state.movies;
     // const selectedMovie = this.state.selectedMovie;
 
-    if (selectedMovie) return <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
+    if (selectedMovie) return <MovieView movie={selectedMovie}
+      onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />;
 
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <div className="main-view">
-        {/* map loops over the items and it transforms its values */}
-        {movies.map(movie => <MovieCard key={movie._id} movie={movie} //props = key, movie {} - for the variables
-          onMovieClick={newSelectedMovie => {
-            this.setState({ selectedMovie: newSelectedMovie });
-          }} />)}
+        {selectedMovie
+          ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+          : movies.map(movie => (
+            <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
+          ))
+        }
       </div>
     );
   }
