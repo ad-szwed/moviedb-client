@@ -19,6 +19,11 @@ export default class MovieView extends React.Component {
   // }
   // }
 
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
 
