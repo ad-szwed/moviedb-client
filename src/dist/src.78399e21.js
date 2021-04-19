@@ -32829,17 +32829,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       });
       /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-
-      if (!user) return _react.default.createElement(_loginView.default, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        }
-      });
-      if (!register) return _react.default.createElement(_registrationView.default, {
-        onRegister: function onRegister(register) {
-          return _this3.onRegister(register);
-        }
-      }); // Before the movies have been loaded
+      // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
+      // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
