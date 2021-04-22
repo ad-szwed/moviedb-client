@@ -3,4 +3,13 @@ img {
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;
+  
 }
+
+.movie-view {
+  margin-top: 50px;
+}
+
+li { list-style: none; display: inline; }
+li:after { content: ", "; }
+li:last-child:after { content: ""; }

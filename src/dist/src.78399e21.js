@@ -48067,27 +48067,18 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
           movie = _this$props.movie,
           onBackClick = _this$props.onBackClick;
       return _react.default.createElement(_reactBootstrap.Container, {
-        className: "text-white"
-      }, _react.default.createElement("div", {
-        className: "movie-view"
-      }, _react.default.createElement("div", {
-        className: "movie-poster"
-      }, _react.default.createElement("img", {
-        src: movie.imgUrl,
-        alt: "movie poster"
-      })), _react.default.createElement("div", {
-        className: "movie-title"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Title: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.title)), _react.default.createElement("div", {
+        className: "text-white text-center movie-view"
+      }, _react.default.createElement(_reactBootstrap.Figure, null, _react.default.createElement(_reactBootstrap.Figure.Image, {
+        src: movie.imgUrl
+      }), _react.default.createElement(_reactBootstrap.Figure.Caption, null, movie.title)), _react.default.createElement("div", {
         className: "movie-genre"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Genre: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.genre.name)), _react.default.createElement("div", {
+      }, "Genre: "), movie.genre.name.map(function (name, index) {
+        return _react.default.createElement("li", {
+          key: index
+        }, name);
+      })), _react.default.createElement("div", {
         className: "movie-director"
       }, _react.default.createElement("span", {
         className: "label"
@@ -48099,11 +48090,11 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Description: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.description)), _react.default.createElement("button", {
+      }, movie.description)), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
           onBackClick(null);
         }
-      }, "Back")));
+      }, "Back"));
     }
   }]);
 
