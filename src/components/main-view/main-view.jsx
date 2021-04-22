@@ -8,6 +8,7 @@ import RegisterView from '../registration-view/registration-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import './main-view.scss'
 
 // ONLY ONE DEFAULT EXPORT PER FILE!!!
 export default class MainView extends React.Component {
@@ -99,34 +100,34 @@ export default class MainView extends React.Component {
         </Navbar>
 
         {/* MOVIE CARDS */}
-        <div className='main-view'>
-          <div className='main-body text-center' >
-            {selectedMovie ? (
-              <MovieView
-                movie={selectedMovie}
-              />
-            ) : (
-              <Container>
-                <Row style={{ marginTop: 100 }}>
-                  {movies.map((movie) => (
-                    <Col xs={12} sm={6} md={4} lg={5} key={movie._id}>
-                      <MovieCard
-                        key={movie._id}
-                        movie={movie}
-                        onClick={(movie) => this.onMovieClick(movie)}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </Container>
-            )}
-          </div>
-          <footer className='fixed-bottom bg-dark text-white text-center'>
-            <h5 className='pt-3'>
-              POWERED BY <a class="szwed-shop" href="https://ad-szwed.github.io" target="blank">&lt;Coding szwed-shop&gt;</a>
-            </h5>
-          </footer>
+        <div className='main-view text-center'>
+          {selectedMovie ? (
+            <MovieView
+              movie={selectedMovie}
+            />
+          ) : (
+            <Container>
+              <Row style={{ marginTop: 100, marginBottom: 100 }}>
+                {movies.map((movie) => (
+                  <Col xs={12} sm={6} md={4} lg={3} key={movie._id}>
+                    <MovieCard
+                      key={movie._id}
+                      movie={movie}
+                      onClick={(movie) => this.onMovieClick(movie)}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </Container>
+          )}
         </div>
+
+        {/* FOOTER */}
+        <footer className='fixed-bottom bg-dark text-white text-center'>
+          <h5 className='pt-3'>
+            POWERED BY <a className="szwed-shop" href="https://ad-szwed.github.io" target="blank">&lt;Coding szwed-shop&gt;</a>
+          </h5>
+        </footer>
       </React.Fragment>
     );
   }
