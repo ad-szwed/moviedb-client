@@ -1,3 +1,10 @@
+.login-form {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .movie-card {
   max-width: 30vh;
   object-fit: contain;
