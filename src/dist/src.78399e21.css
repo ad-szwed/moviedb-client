@@ -1,5 +1,15 @@
-.my-flix {
-  color: steelblue;
+.szwed-shop {
+  color: #c32a22;
+  font-family: "Pacifico", cursive;
+  font-weight: 200;
+  font-size: 19px;
+}
+
+.szwed-shop:hover,
+.szwed-shop:focus,
+.szwed-shop:active {
+  text-decoration: none;
+  color: #c32a22;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

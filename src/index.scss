@@ -1,5 +1,13 @@
-$color: steelblue;
+.szwed-shop {
+  color: rgb(195, 42, 34);
+  font-family: 'Pacifico', cursive;
+  font-weight: 200;
+  font-size: 19px;
+}
 
-.my-flix {
-  color: $color;
+.szwed-shop:hover,
+.szwed-shop:focus,
+.szwed-shop:active {
+  text-decoration: none;
+  color: rgb(195, 42, 34);
 }

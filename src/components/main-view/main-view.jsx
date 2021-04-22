@@ -7,17 +7,17 @@ import LoginView from '../login-view/login-view';
 import RegisterView from '../registration-view/registration-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 // ONLY ONE DEFAULT EXPORT PER FILE!!!
 export default class MainView extends React.Component {
 
+  // we put our states inside a constructor()
   constructor() {
     super();
-    // code executed right when the component is created in the memory
+    // code executed right when the component is created in the memory, inheritance
     this.state = {
+      // states are my variables
       movies: [],
       selectedMovie: null,
       user: null
@@ -81,20 +81,53 @@ export default class MainView extends React.Component {
     if (!movies) return <div className="main-view" />;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-            <Col md={8}>
-              <MovieView movie={selectedMovie} />
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={5}>
-              <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-            </Col>
-          ))
-        }
-      </Row>
+      <React.Fragment>
+        {/* NAVIGATION */}
+        <Navbar bg="dark" variant="dark" fixed="top">
+          <Navbar.Brand href="#home"><h5>MOVIEdb</h5></Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+          {/* PROFILE OPTIONS */}
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="ml-auto">
+              <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 10 }}>
+                <NavDropdown.Item href="favourites">Favourites</NavDropdown.Item>
+                <NavDropdown.Item href="login-page">Logout</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+        {/* MOVIE CARDS */}
+        <div className='main-view'>
+          <div className='main-body text-center' >
+            {selectedMovie ? (
+              <MovieView
+                movie={selectedMovie}
+              />
+            ) : (
+              <Container>
+                <Row style={{ marginTop: 100 }}>
+                  {movies.map((movie) => (
+                    <Col xs={12} sm={6} md={4} lg={5} key={movie._id}>
+                      <MovieCard
+                        key={movie._id}
+                        movie={movie}
+                        onClick={(movie) => this.onMovieClick(movie)}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </Container>
+            )}
+          </div>
+          <footer className='fixed-bottom bg-dark text-white text-center'>
+            <h5 className='pt-3'>
+              POWERED BY <a class="szwed-shop" href="https://ad-szwed.github.io" target="blank">&lt;Coding szwed-shop&gt;</a>
+            </h5>
+          </footer>
+        </div>
+      </React.Fragment>
     );
   }
 }
