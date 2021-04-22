@@ -1,0 +1,11 @@
+.movie-card {  
+  max-width: 30vh;
+  object-fit: contain;
+  margin: 10px 0;
+  transition: all .1s ease-in-out;
+}
+
+.movie-card:hover {
+  transform: scale(1.01);
+}
+

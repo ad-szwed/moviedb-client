@@ -1,3 +1,20 @@
+.movie-card {
+  max-width: 30vh;
+  object-fit: contain;
+  margin: 10px 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.movie-card:hover {
+  transform: scale(1.01);
+}
+.row {
+  margin-top: 100px;
+}
+
+body {
+  background-color: #241727;
+}
 .szwed-shop {
   color: #c32a22;
   font-family: "Pacifico", cursive;
@@ -10,6 +27,10 @@
 .szwed-shop:active {
   text-decoration: none;
   color: #c32a22;
+}
+
+h5:hover {
+  cursor: default;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
