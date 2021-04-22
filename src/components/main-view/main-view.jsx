@@ -91,7 +91,7 @@ export default class MainView extends React.Component {
           {/* PROFILE OPTIONS */}
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 10 }}>
+              <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
                 <NavDropdown.Item href="favourites">Favourites</NavDropdown.Item>
                 <NavDropdown.Item href="login-page">Logout</NavDropdown.Item>
               </NavDropdown>
