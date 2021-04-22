@@ -8,6 +8,12 @@
 .movie-card:hover {
   transform: scale(1.01);
 }
+img {
+  max-height: 50vh;
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
 .row {
   margin-top: 100px;
 }
