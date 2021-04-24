@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { Col, Container, Form, Button } from 'react-bootstrap'
 
 export default function RegisterView(props) {
   const [username, setUsername] = useState('');
@@ -14,25 +15,44 @@ export default function RegisterView(props) {
   }
 
   return (
-    <form>
-      <label>
-        Email:
-        <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
-      </label>
-      <label>
-        Birthday:
-        <input type='text' value={birthday} onChange={e => setBirthday(e.target.value)} />
-      </label>
-      <label>
-        Username:
-        <input type='text' value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type='text' value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <button type='submit' onClick={onSubmit}>Submit</button>
-    </form>
+    <Container>
+      <Form>
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter email"
+              onChange={e => setEmail(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="username" placeholder="Choose username"
+              onChange={e => setUsername(e.target.value)} />
+          </Form.Group>
+        </Form.Row>
+
+        <Form.Row>
+          <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Label>Birthday</Form.Label>
+            <Form.Control type="date" placeholder="Enter Birthday"
+              onChange={e => setBirthday(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password"
+              onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
+        </Form.Row>
+
+        <Button variant="primary" type="submit" onClick={onSubmit}>
+          Submit
+        </Button>
+      </Form>
+    </Container>
+
+
+
   );
 }
 

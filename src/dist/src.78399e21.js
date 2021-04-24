@@ -47844,6 +47844,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _reactBootstrap = require("react-bootstrap");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -47889,34 +47891,47 @@ function RegisterView(props) {
     props.onRegister(username);
   };
 
-  return _react.default.createElement("form", null, _react.default.createElement("label", null, "Email:", _react.default.createElement("input", {
-    type: "text",
-    value: email,
+  return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
+    as: _reactBootstrap.Col,
+    controlId: "formGridEmail"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "email",
+    placeholder: "Enter email",
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Birthday:", _react.default.createElement("input", {
-    type: "text",
-    value: birthday,
-    onChange: function onChange(e) {
-      return setBirthday(e.target.value);
-    }
-  })), _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
-    type: "text",
-    value: username,
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    as: _reactBootstrap.Col,
+    controlId: "formGridPassword"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "username",
+    placeholder: "Choose username",
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
-    type: "text",
-    value: password,
+  }))), _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
+    as: _reactBootstrap.Col,
+    controlId: "formGridEmail"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "date",
+    placeholder: "Enter Birthday",
+    onChange: function onChange(e) {
+      return setBirthday(e.target.value);
+    }
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+    as: _reactBootstrap.Col,
+    controlId: "formGridPassword"
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), _react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "password",
+    placeholder: "Password",
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement("button", {
+  }))), _react.default.createElement(_reactBootstrap.Button, {
+    variant: "primary",
     type: "submit",
     onClick: onSubmit
-  }, "Submit"));
+  }, "Submit")));
 }
 
 RegisterView.propTypes = {
@@ -47928,7 +47943,7 @@ RegisterView.propTypes = {
   }),
   onRegister: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -48275,9 +48290,17 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       });
       /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-      // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-      // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
-      // Before the movies have been loaded
+
+      if (!user) return _react.default.createElement(_loginView.default, {
+        onLoggedIn: function onLoggedIn(user) {
+          return _this3.onLoggedIn(user);
+        }
+      });
+      if (!register) return _react.default.createElement(_registrationView.default, {
+        onRegister: function onRegister(register) {
+          return _this3.onRegister(register);
+        }
+      }); // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
@@ -48439,7 +48462,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54378" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56492" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
