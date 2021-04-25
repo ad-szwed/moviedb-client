@@ -18,7 +18,7 @@ export default function LoginView(props) {
 
     <Form className="login-form">
       {/* LOGIN */}
-      <Form.Group controlId="formBasicLogin">
+      <Form.Group controlId="formUsername">
         <Form.Control
           placeholder="Login"
           type="text"
@@ -27,7 +27,7 @@ export default function LoginView(props) {
       </Form.Group>
 
       {/* PASSWORD */}
-      <Form.Group controlId="formBasicPassword">
+      <Form.Group controlId="formPassword">
         <Form.Control
           type="password"
           placeholder="Password"
