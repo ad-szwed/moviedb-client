@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 import { Form, Button } from 'react-bootstrap';
 import './login-view.scss'
 
@@ -8,28 +10,39 @@ export default function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    axios.post('https://szwedshop-moviedb.herokuapp.com/login', {
+      username: username,
+      password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('incorrect login credentials')
+      });
   };
 
   return (
 
     <Form className="login-form">
       {/* LOGIN */}
+      <Form.Label className="text-white">Username</Form.Label>
       <Form.Group controlId="formUsername">
         <Form.Control
           placeholder="Login"
-          type="text"
           value={username}
+          type="text"
           onChange={e => setUsername(e.target.value)} />
       </Form.Group>
 
       {/* PASSWORD */}
       <Form.Group controlId="formPassword">
+        <Form.Label className="text-white">Password</Form.Label>
         <Form.Control
           type="password"
+          value={password}
           placeholder="Password"
           onChange={e => setPassword(e.target.value)} />
       </Form.Group>
