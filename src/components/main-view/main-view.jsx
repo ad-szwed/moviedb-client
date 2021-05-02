@@ -65,6 +65,21 @@ export default class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  getMovies(token) {
+    axios.get('https://szwedshop-moviedb.herokuapp.com/movies', {
+      headers: { Authorization: 'Bearer ${token}' }
+    })
+      .then(response => {
+        // assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error)
+      });
+  }
+
   onRegister(register) {
     this.setState({
       register
