@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Container, Form, Button } from 'react-bootstrap'
+import { Col, Container, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 export default function RegisterView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(username, password, email, birthday);
+
+  //   axios.post('https://szwedshop-moviedb.herokuapp.com/users', {
+  //     username: username,
+  //     password: password,
+  //     email: email,
+  //     birthday: birthday
+  //   })
+  //     .then(response => {
+  //       const data = response.data;
+  //       // props.onRegister(username);
+  //       console.log(data);
+  //       // window.open('/');
+  //     })
+  //     .catch(e => {
+  //       console.log('problem registering new user');
+  //     });
+  // }
 
   const onSubmit = (e) => {
     e.preventDefault();
