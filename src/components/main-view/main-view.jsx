@@ -28,7 +28,6 @@ export default class MainView extends React.Component {
   // hook, component, code executed right after the component is added to the DOM.
   componentDidMount() {
 
-    // MOVIE LIST WITH AUTH:
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -54,7 +53,6 @@ export default class MainView extends React.Component {
   }
 
   // LOCAL STORAGE TO KEEP USER LOGGED-IN {
-
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -64,6 +62,14 @@ export default class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.username);
     this.getMovies(authData.token);
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
   }
 
   getMovies(token) {
@@ -114,7 +120,7 @@ export default class MainView extends React.Component {
             <Nav className="ml-auto">
               <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
                 <NavDropdown.Item href="favourites">Favourites</NavDropdown.Item>
-                <NavDropdown.Item href="login-page">Logout</NavDropdown.Item>
+                <NavDropdown.Item href="login-page" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
