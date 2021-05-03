@@ -21,7 +21,8 @@ export default function LoginView(props) {
         console.log('logged-in correctly')
       })
       .catch(e => {
-        console.log('incorrect login credentials')
+        console.log('incorrect login credentials');
+        console.log(e);
       });
   };
 
