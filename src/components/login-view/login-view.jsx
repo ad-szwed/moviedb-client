@@ -18,6 +18,7 @@ export default function LoginView(props) {
       .then(response => {
         const data = response.data;
         props.onLoggedIn(data);
+        console.log('logged-in correctly')
       })
       .catch(e => {
         console.log('incorrect login credentials')
