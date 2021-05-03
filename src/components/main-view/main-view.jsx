@@ -25,9 +25,8 @@ export default class MainView extends React.Component {
     };
   }
 
-  // hook, component, 
+  // hook, component, code executed right after the component is added to the DOM.
   componentDidMount() {
-    // code executed right after the component is added to the DOM.
 
     // MOVIE LIST WITH AUTH:
     let accessToken = localStorage.getItem('token');
@@ -38,16 +37,6 @@ export default class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
-
-  // MOVIE LIST WITHOUT AUTH:
-  //   axios.get('https://szwedshop-moviedb.herokuapp.com/movies')
-  //     .then(response => {
-  //       this.setState({
-  //         movies: response.data
-  //       });
-  //     })
-  //     .catch(error => console.log(error));
-  // }
 
   /*When a movie is clicked, this function is invoked 
   and updates the state of the `selectedMovie` *property to that movie*/
@@ -64,16 +53,7 @@ export default class MainView extends React.Component {
     });
   }
 
-  /* When a user successfully logs in, this function updates the `user` property 
-  in state to that *particular user*/
-
-  onLoggedIn(user) {
-    this.setState({
-      user
-    });
-  }
-
-  // LOCAL STORAGE TO KEEP USER LOGGED-IN
+  // LOCAL STORAGE TO KEEP USER LOGGED-IN {
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -82,13 +62,13 @@ export default class MainView extends React.Component {
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setitem('user', authData.user.username);
+    localStorage.setItem('user', authData.user.username);
     this.getMovies(authData.token);
   }
 
   getMovies(token) {
     axios.get('https://szwedshop-moviedb.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         // Assign the result to the state
