@@ -3,11 +3,13 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+
 import LoginView from '../login-view/login-view';
 import RegisterView from '../registration-view/registration-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
-import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './main-view.scss'
 
 // ONLY ONE DEFAULT EXPORT PER FILE!!!
