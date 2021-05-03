@@ -28,6 +28,8 @@ export default class MainView extends React.Component {
   // hook, component, 
   componentDidMount() {
     // code executed right after the component is added to the DOM.
+
+    // MOVIE LIST WITH AUTH:
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -36,6 +38,16 @@ export default class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
+
+  // MOVIE LIST WITHOUT AUTH:
+  //   axios.get('https://szwedshop-moviedb.herokuapp.com/movies')
+  //     .then(response => {
+  //       this.setState({
+  //         movies: response.data
+  //       });
+  //     })
+  //     .catch(error => console.log(error));
+  // }
 
   /*When a movie is clicked, this function is invoked 
   and updates the state of the `selectedMovie` *property to that movie*/
@@ -55,7 +67,14 @@ export default class MainView extends React.Component {
   /* When a user successfully logs in, this function updates the `user` property 
   in state to that *particular user*/
 
-  // local storage for logged-in user
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
+
+  // LOCAL STORAGE TO KEEP USER LOGGED-IN
+
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
