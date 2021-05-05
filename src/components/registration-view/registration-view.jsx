@@ -29,7 +29,7 @@ export default function RegisterView(props) {
   //       console.log('problem registering new user');
   //     });
   // }
-
+  []
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
