@@ -10,6 +10,8 @@ import LoginView from '../login-view/login-view';
 import RegisterView from '../registration-view/registration-view';
 import MovieCard from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
+import DirectorView from '../director-view/director-view';
+import GenreView from '../genre-view/genre-view';
 import './main-view.scss'
 
 // ONLY ONE DEFAULT EXPORT PER FILE!!!
@@ -95,15 +97,20 @@ export default class MainView extends React.Component {
 
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, user, register } = this.state;
 
     // back button
-    if (selectedMovie) return <MovieView movie={selectedMovie}
+    {/* if (selectedMovie) return <MovieView movie={selectedMovie}
       onBackClick={movieSelection => this.setSelectedMovie(movieSelection)
-      } />;
+      } />; */ }
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <Row>
+      <Col>
+        <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+      </Col>
+    </Row>
+    if (movies.length === 0) return <div className="main-view" />;
 
     // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
 
@@ -121,35 +128,61 @@ export default class MainView extends React.Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
               <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
-                <NavDropdown.Item href="favourites">Favourites</NavDropdown.Item>
+                <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
                 <NavDropdown.Item href="login-page" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
 
-        {/* MOVIE CARDS */}
-        <div className='main-view text-center'>
-          {selectedMovie ? (
-            <MovieView
-              movie={selectedMovie}
-            />
-          ) : (
-            <Container>
-              <Row style={{ marginTop: 100, marginBottom: 100 }}>
-                {movies.map((movie) => (
-                  <Col xs={12} sm={6} md={4} lg={3} key={movie._id}>
-                    <MovieCard
-                      key={movie._id}
-                      movie={movie}
-                      onClick={(movie) => this.onMovieClick(movie)}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </Container>
-          )}
-        </div>
+        {/* ROUTING */}
+        <Router>
+          <Row className='main-view text-center justify-content-md-center'>
+
+            {/* SPECIFIC MOVIE VIEW */}
+            <Route path="/movies/:movieId" render={({ match }) => {
+              return <Col md={8}>
+                <MovieView
+                  onBackClick={movieSelection => this.setSelectedMovie(movieSelection)}
+                  movie={movies.find(m => m._id === match.params.movieId)} />
+              </Col>
+            }} />
+
+            {/* MAIN SCREEN VIEW */}
+            <Route exact path="/" render={() => {
+              return movies.map(movie => (
+                <Col xs={12} sm={6} md={4} lg={3} key={movie._id}>
+                  <MovieCard
+                    key={movie._id}
+                    movie={movie}
+                    onClick={(movie) => this.onMovieClick(movie)}
+                  />
+                </Col>
+              ))
+            }} />
+
+            {/* GENRE VIEW */}
+            <Route exact path="/genre/name" render={({ match }) => {
+              return <Col md={8}>
+                <GenreView genre={movies.find(m.genre.name === match.params.name).genre} />
+              </Col>
+            }} />
+
+            {/* DIRECTORS VIEW */}
+            <Router exact path="/directors/:name" render={({ match }) => {
+              return <Col md={8}>
+                <DirectorView director={movies.find(m.director.name === match.params.name).director} />
+              </Col>
+            }} />
+
+            {/* LOGIN VIEW */}
+
+            {/* REGISTRATION VIEW */}
+
+            {/* PROFILE VIEW */}
+          </Row>
+        </Router>
+
 
         {/* FOOTER */}
         <footer className='fixed-bottom bg-dark text-white text-center'>
