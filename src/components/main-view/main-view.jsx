@@ -142,7 +142,7 @@ export default class MainView extends React.Component {
             <Route path="/movies/:movieId" render={({ match }) => {
               return <Col md={8}>
                 <MovieView
-                  onBackClick={movieSelection => this.setSelectedMovie(movieSelection)}
+                  onBackClick={() => history.goBack()}
                   movie={movies.find(m => m._id === match.params.movieId)} />
               </Col>
             }} />
@@ -155,9 +155,11 @@ export default class MainView extends React.Component {
             }} />
 
             {/* DIRECTORS VIEW */}
-            <Router exact path="/directors/:name" render={({ match }) => {
+            <Router exact path="/directors/:name" render={({ match, history }) => {
+              if (movie.length === 0) return <div className="main-view" />
               return <Col md={8}>
-                <DirectorView director={movies.find(m.director.name === match.params.name).director} />
+                <DirectorView director={movies.find(m.director.name === match.params.name).director}
+                  onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
