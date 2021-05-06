@@ -64,9 +64,6 @@ export default class MainView extends React.Component {
     this.setState({ selectedMovie: movieSelection });
   }
 
-  onMovieClick(movie) {
-    this.setState({ selectedMovie: movie });
-  }
 
   // LOCAL STORAGE TO KEEP USER LOGGED-IN {
   onLoggedIn(authData) {
@@ -155,14 +152,13 @@ export default class MainView extends React.Component {
                   <MovieCard
                     key={movie._id}
                     movie={movie}
-                    onClick={(movie) => this.onMovieClick(movie)}
                   />
                 </Col>
               ))
             }} />
 
             {/* GENRE VIEW */}
-            <Route exact path="/genre/name" render={({ match }) => {
+            <Route exact path="/genre/:name" render={({ match }) => {
               return <Col md={8}>
                 <GenreView genre={movies.find(m.genre.name === match.params.name).genre} />
               </Col>
