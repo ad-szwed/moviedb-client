@@ -3,7 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import LoginView from '../login-view/login-view';
@@ -172,10 +172,25 @@ export default class MainView extends React.Component {
             }} />
 
             {/* LOGIN VIEW */}
+            <Route exact path="/log-in" render={() => {
+              return <Col md={9}>
+                <LoginView />
+              </Col>
+            }} />
 
             {/* REGISTRATION VIEW */}
+            <Route exact path="/register" render={({ match }) => {
+              return <Col md={9}>
+                <RegisterView />
+              </Col>
+            }} />
 
             {/* PROFILE VIEW */}
+            <Route exact path="/profile" render={({ match }) => {
+              return <Col md={9}>
+                <ProfileView profile={users.find(u => u._id === match.params.userId)} />
+              </Col>
+            }} />
           </Row>
         </Router>
 
