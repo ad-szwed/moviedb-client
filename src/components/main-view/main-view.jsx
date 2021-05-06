@@ -56,15 +56,6 @@ export default class MainView extends React.Component {
       });
   }
 
-  // ************************************* HOW DOES newSelectedMovie WORK? *************************
-
-  /*When a movie is clicked, this function is invoked 
-    and updates the state of the `selectedMovie` *property to that movie*/
-  setSelectedMovie(movieSelection) {
-    this.setState({ selectedMovie: movieSelection });
-  }
-
-
   // LOCAL STORAGE TO KEEP USER LOGGED-IN {
   onLoggedIn(authData) {
     console.log(authData);
@@ -84,7 +75,6 @@ export default class MainView extends React.Component {
       user: null
     });
   }
-
 
   onRegister(register) {
     this.setState({
@@ -136,15 +126,6 @@ export default class MainView extends React.Component {
         <Router>
           <Row className='main-view text-center justify-content-md-center'>
 
-            {/* SPECIFIC MOVIE VIEW */}
-            <Route path="/movies/:movieId" render={({ match }) => {
-              return <Col md={8}>
-                <MovieView
-                  onBackClick={movieSelection => this.setSelectedMovie(movieSelection)}
-                  movie={movies.find(m => m._id === match.params.movieId)} />
-              </Col>
-            }} />
-
             {/* MAIN SCREEN VIEW */}
             <Route exact path="/" render={() => {
               return movies.map(movie => (
@@ -155,6 +136,15 @@ export default class MainView extends React.Component {
                   />
                 </Col>
               ))
+            }} />
+            {/* SPECIFIC MOVIE VIEW */}
+
+            <Route path="/movies/:movieId" render={({ match }) => {
+              return <Col md={8}>
+                <MovieView
+                  onBackClick={movieSelection => this.setSelectedMovie(movieSelection)}
+                  movie={movies.find(m => m._id === match.params.movieId)} />
+              </Col>
             }} />
 
             {/* GENRE VIEW */}
@@ -174,7 +164,7 @@ export default class MainView extends React.Component {
             {/* LOGIN VIEW */}
             <Route exact path="/log-in" render={() => {
               return <Col md={9}>
-                <LoginView />
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
             }} />
 
