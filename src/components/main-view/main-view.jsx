@@ -150,7 +150,8 @@ export default class MainView extends React.Component {
             {/* GENRE VIEW */}
             <Route exact path="/genre/:name" render={({ match }) => {
               return <Col md={8}>
-                <GenreView genre={movies.find(m.genre.name === match.params.name).genre} />
+                <GenreView genre={movies.find(m.genre.name === match.params.name).genre}
+                  onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
