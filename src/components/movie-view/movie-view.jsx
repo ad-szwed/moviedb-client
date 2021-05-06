@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+
 
 import { Container, Button, Figure } from 'react-bootstrap';
 import './movie-view.scss'
@@ -28,7 +30,7 @@ export default class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie } = this.props;
 
     return (
 
@@ -56,7 +58,9 @@ export default class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.description}</span>
         </div>
-        <Button onClick={() => { onBackClick(null); }}>Back</Button>
+        <Link to={`/`}>
+          <Button variant="primary">Back</Button>
+        </Link>
       </Container>
 
     );
