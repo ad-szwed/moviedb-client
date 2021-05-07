@@ -86,18 +86,12 @@ export default class MainView extends React.Component {
   render() {
     const { movies, user, register } = this.state;
 
-    // back button
-    {/* if (selectedMovie) return <MovieView movie={selectedMovie}
-      onBackClick={movieSelection => this.setSelectedMovie(movieSelection)
-      } />; */ }
-
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return <Row>
       <Col>
         <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
       </Col>
     </Row>
-    if (movies.length === 0) return <div className="main-view" />;
 
     // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
 
@@ -137,8 +131,8 @@ export default class MainView extends React.Component {
                 </Col>
               ))
             }} />
-            {/* SPECIFIC MOVIE VIEW */}
 
+            {/* SPECIFIC MOVIE VIEW */}
             <Route path="/movies/:movieId" render={({ match }) => {
               return <Col md={8}>
                 <MovieView
@@ -165,7 +159,7 @@ export default class MainView extends React.Component {
             }} />
 
             {/* LOGIN VIEW */}
-            <Route exact path="/log-in" render={() => {
+            <Route exact path="/login" render={() => {
               return <Col md={9}>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
@@ -184,6 +178,7 @@ export default class MainView extends React.Component {
                 <ProfileView profile={users.find(u => u._id === match.params.userId)} />
               </Col>
             }} />
+
           </Row>
         </Router>
 

@@ -9,7 +9,7 @@ export default class MovieCard extends React.Component {
     const { movie, onClick } = this.props;
 
     return (
-      <Card className="movie-card" onClick={() => onClick(movie)}>
+      <Card className="movie-card">
 
         <Link to={`/movies/${movie._id}`}>
           <Card.Img src={movie.imgUrl} />

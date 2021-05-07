@@ -9,32 +9,27 @@ export default function RegisterView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(username, password, email, birthday);
-
-  //   axios.post('https://szwedshop-moviedb.herokuapp.com/users', {
-  //     username: username,
-  //     password: password,
-  //     email: email,
-  //     birthday: birthday
-  //   })
-  //     .then(response => {
-  //       const data = response.data;
-  //       // props.onRegister(username);
-  //       console.log(data);
-  //       // window.open('/');
-  //     })
-  //     .catch(e => {
-  //       console.log('problem registering new user');
-  //     });
-  // }
-  []
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
-    props.onRegister(username);
+
+    axios.post('https://szwedshop-moviedb.herokuapp.com/users', {
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday
+    })
+      .then(response => {
+        const data = response.data;
+        // props.onRegister(username);
+        console.log(data);
+        window.open('/', '_self');
+      })
+      .catch(e => {
+        console.log('problem registering new user', e);
+      });
   }
+
 
   return (
     <Container>
