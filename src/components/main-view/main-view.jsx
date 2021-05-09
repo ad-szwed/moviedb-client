@@ -1,5 +1,3 @@
-// imports must be in { } if not exported default
-
 import React from 'react';
 import axios from 'axios';
 
