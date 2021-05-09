@@ -113,7 +113,7 @@ export default class MainView extends React.Component {
               <Nav className="ml-auto">
                 <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
                   <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
-                  <NavDropdown.Item href="login-page" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item href="/" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
