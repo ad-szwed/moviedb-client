@@ -25,7 +25,10 @@ export default class DirectorView extends React.Component {
           </Figure.Caption>
           {director.bio}
         </Figure>
-        <Button variant="primary" onClick={() => { onBackClick(); }}>Back</Button>
+        <Button variant="primary" onClick={() => {
+          onBackClick();
+        }}>Back
+        </Button>
 
 
 
