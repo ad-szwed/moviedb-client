@@ -3,8 +3,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
-import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import LoginView from '../login-view/login-view';
 import RegisterView from '../registration-view/registration-view';
@@ -25,7 +25,7 @@ export default class MainView extends React.Component {
       // states are my variables
       movies: [],
       selectedMovie: null,
-      user: null
+      user: null,
     };
   }
 
@@ -100,24 +100,25 @@ export default class MainView extends React.Component {
 
     return (
       <React.Fragment>
-        {/* NAVIGATION */}
-        <Navbar bg="dark" variant="dark" fixed="top">
-          <Navbar.Brand href="#home"><h5>MOVIEdb</h5></Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
-          {/* PROFILE OPTIONS */}
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ml-auto">
-              <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
-                <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
-                <NavDropdown.Item href="login-page" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-
-        {/* ROUTING */}
         <Router>
+          {/* NAVIGATION */}
+          <Navbar bg="dark" variant="dark" fixed="top">
+            <Link to={'/'}>
+              <Navbar.Brand><h5>MOVIEdb</h5></Navbar.Brand>
+            </Link>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+            {/* PROFILE OPTIONS */}
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="ml-auto">
+                <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
+                  <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
+                  <NavDropdown.Item href="login-page" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+
           <Row className='main-view text-center justify-content-md-center'>
 
             {/* MAIN SCREEN VIEW */}
@@ -133,33 +134,35 @@ export default class MainView extends React.Component {
             }} />
 
             {/* SPECIFIC MOVIE VIEW */}
-            <Route path="/movies/:movieId" render={({ match }) => {
+            <Route exact path="/movies/:movieId" render={({ match }) => {
               return <Col md={8}>
                 <MovieView
-                  onBackClick={() => history.goBack()}
                   movie={movies.find(m => m._id === match.params.movieId)} />
               </Col>
             }} />
 
             {/* GENRE VIEW */}
-            <Route exact path="/genre/:name" render={({ match }) => {
+            <Route exact path="/genre/:name" render={({ match, history }) => {
               return <Col md={8}>
-                <GenreView genre={movies.find(m.genre.name === match.params.name).genre}
+                <GenreView genre={movies && movies.find(m => {
+                  console.log(m.genre, "!!m");
+                  return m.genre.name === match.params.name
+                }).genre}
+
                   onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
             {/* DIRECTORS VIEW */}
-            <Router exact path="/directors/:name" render={({ match, history }) => {
-              if (movie.length === 0) return <div className="main-view" />
+            <Route exact path="/directors/:name" render={({ match }) => {
               return <Col md={8}>
-                <DirectorView director={movies.find(m.director.name === match.params.name).director}
-                  onBackClick={() => history.goBack()} />
+                <DirectorView
+                  director={movies && movies.find(m => m.director.name === match.params.name).director} />
               </Col>
             }} />
 
             {/* LOGIN VIEW */}
-            <Route exact path="/login" render={() => {
+            <Route exact path="/log-in" render={() => {
               return <Col md={9}>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
@@ -178,7 +181,6 @@ export default class MainView extends React.Component {
                 <ProfileView profile={users.find(u => u._id === match.params.userId)} />
               </Col>
             }} />
-
           </Row>
         </Router>
 

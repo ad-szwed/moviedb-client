@@ -24,13 +24,14 @@ export default class MovieView extends React.Component {
   // }
   // }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
   render() {
     const { movie } = this.props;
+    console.log(movie, "!!movie");
 
     return (
 
@@ -46,13 +47,15 @@ export default class MovieView extends React.Component {
         <div className="movie-genre">
           <span className="label">Genre: </span>
           {movie.genre.name.map(function (name, index) {
-            return <li key={index}>{name}</li>;
+            return <Link to={`/genre/${name}`}> <li key={index}>{name}</li> </Link>
           })}
         </div>
 
         <div className="movie-director">
           <span className="label">Director: </span>
-          <span className="value">{movie.director.name}</span>
+          <Link to={`/directors/${movie.director.name}`}>
+            <span className="value">{movie.director.name}</span>
+          </Link>
         </div>
         <div className="movie-description">
           <span className="label">Description: </span>
