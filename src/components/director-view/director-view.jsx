@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, Container } from 'react-bootstrap';
+import { Figure, Container, Button } from 'react-bootstrap';
 
 
 export default class DirectorView extends React.Component {
@@ -11,24 +11,25 @@ export default class DirectorView extends React.Component {
   }
 
   render() {
-    const { director } = this.props;
-
-    console.log("we''re at director-view", director)
+    const { director, onBackClick } = this.props;
 
     if (!director) return null;
 
     return (
-      <div className='director-view'>
-        Name:
-        <Container>
-          <Card className='director-card'>
-            <Card.Body>
-              <Card.Title className='director-name'>Name: {director.name}</Card.Title>
-            </Card.Body>
-          </Card>
 
-        </Container>
-      </div>
+      <Container>
+        <Figure className="text-white">
+          <Figure.Image src={director.picUrl} />
+          <Figure.Caption>
+            {director.name}
+          </Figure.Caption>
+          {director.bio}
+        </Figure>
+        <Button variant="primary" onClick={() => { onBackClick(); }}>Back</Button>
+
+
+
+      </Container>
     )
   }
 }

@@ -96,7 +96,7 @@ export default class MainView extends React.Component {
     // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
 
     // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
+    if (movies.length === 0) return <div className="main-view" />
 
     return (
       <React.Fragment>
@@ -148,16 +148,16 @@ export default class MainView extends React.Component {
                   console.log(m.genre, "!!m");
                   return m.genre.name === match.params.name
                 }).genre}
-
                   onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
             {/* DIRECTORS VIEW */}
-            <Route exact path="/directors/:name" render={({ match }) => {
+            <Route exact path="/directors/:name" render={({ match, history }) => {
               return <Col md={8}>
                 <DirectorView
-                  director={movies && movies.find(m => m.director.name === match.params.name).director} />
+                  director={movies && movies.find(m => m.director.name === match.params.name).director}
+                  onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
