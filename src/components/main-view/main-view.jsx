@@ -112,7 +112,9 @@ export default class MainView extends React.Component {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
                 <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
-                  <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
+                  <Link to={'/profile'}>
+                    <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
+                  </Link>
                   <NavDropdown.Item href="/" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
