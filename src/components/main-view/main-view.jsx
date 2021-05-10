@@ -84,7 +84,7 @@ export default class MainView extends React.Component {
 
 
   render() {
-    const { movies, user, register } = this.state;
+    const { movies, user, users, register } = this.state;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return <Row>
@@ -147,10 +147,7 @@ export default class MainView extends React.Component {
             <Route exact path="/genre/:name" render={({ match, history }) => {
               return <Col md={8}>
                 <GenreView
-                  genre={movies.find(m => {
-                    console.log(m, '!!mmm')
-                    return m.genre.name.includes(match.params.name)
-                  }).genre}
+                  genre={match.params.name}
                   onBackClick={() => history.goBack()} />
               </Col>
             }} />
