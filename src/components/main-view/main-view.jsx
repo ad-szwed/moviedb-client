@@ -77,24 +77,15 @@ export default class MainView extends React.Component {
     });
   }
 
-  onRegister(register) {
-    this.setState({
-      register
-    });
-  }
+  // onRegister(register) {
+  //   this.setState({
+  //     register
+  //   });
+  // }
 
 
   render() {
     const { movies, user, register } = this.state;
-
-    /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-
-    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-
-    // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
-
-    // Before the movies have been loaded
-
 
     return (
       <React.Fragment>
