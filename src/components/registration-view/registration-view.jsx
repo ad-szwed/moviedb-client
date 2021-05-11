@@ -21,7 +21,6 @@ export default function RegisterView(props) {
     })
       .then(response => {
         const data = response.data;
-        // props.onRegister(username);
         console.log(data);
         window.open('/', '_self');
       })
