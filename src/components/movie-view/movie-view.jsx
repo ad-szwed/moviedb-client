@@ -8,22 +8,6 @@ import './movie-view.scss'
 
 export default class MovieView extends React.Component {
 
-  // key press console logging: {
-
-  // keypressCallback(event) {
-  //   console.log(event.key);
-  // }
-
-  // componentDidMount() {
-  //   document.addEventListener('keypress', this.keypressCallback);
-  // }
-
-  // componentWillUnmount() {
-  // code executed just before the moment the component gets removed from the DOM.
-  //   document.removeEventListener('keypress', this.keypressCallback);
-  // }
-  // }
-
   constructor(props) {
     super(props);
     this.state = {};
