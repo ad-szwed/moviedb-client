@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Link } from "react-router-dom";
 
 import { Form, Button } from 'react-bootstrap';
 import './login-view.scss'
@@ -49,7 +50,10 @@ export default function LoginView(props) {
           onChange={e => setPassword(e.target.value)} />
       </Form.Group>
       <Button variant="primary" type="submit" onClick={handleSubmit}>
-        Submit
+        Log-in
+        </Button>
+      <Button variant="primary" href="/register" style={{ marginLeft: 100 }}>
+        New user
         </Button>
     </Form>
 

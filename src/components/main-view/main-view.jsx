@@ -41,6 +41,7 @@ export default class MainView extends React.Component {
     }
   }
 
+  // Retrieving movies from API
   getMovies(token) {
     axios.get('https://szwedshop-moviedb.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
@@ -84,19 +85,16 @@ export default class MainView extends React.Component {
 
 
   render() {
-    const { movies, user, users, register } = this.state;
+    const { movies, user, register } = this.state;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-    if (!user) return <Row>
-      <Col>
-        <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-      </Col>
-    </Row>
+
+    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
 
     // if (!register) return <RegisterView onRegister={register => this.onRegister(register)} />;
 
     // Before the movies have been loaded
-    if (movies.length === 0) return <div className="main-view" />
+
 
     return (
       <React.Fragment>
@@ -112,9 +110,7 @@ export default class MainView extends React.Component {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
                 <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
-                  <Link to={'/profile'}>
-                    <NavDropdown.Item href="favourites">Profile view</NavDropdown.Item>
-                  </Link>
+                  <NavDropdown.Item href="/profile/">Profile view</NavDropdown.Item>
                   <NavDropdown.Item href="/" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
@@ -125,6 +121,10 @@ export default class MainView extends React.Component {
 
             {/* MAIN SCREEN VIEW */}
             <Route exact path="/" render={() => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              if (movies.length === 0) return <div className="main-view" />
               return movies.map(movie => (
                 <Col xs={12} sm={6} md={4} lg={3} key={movie._id}>
                   <MovieCard
@@ -137,6 +137,7 @@ export default class MainView extends React.Component {
 
             {/* SPECIFIC MOVIE VIEW */}
             <Route exact path="/movies/:movieId" render={({ match }) => {
+              if (movies.length === 0) return <div className="main-view" />
               return <Col md={8}>
                 <MovieView
                   movie={movies.find(m => m._id === match.params.movieId)} />
@@ -145,6 +146,7 @@ export default class MainView extends React.Component {
 
             {/* GENRE VIEW */}
             <Route exact path="/genre/:name" render={({ match, history }) => {
+              if (movies.length === 0) return <div className="main-view" />
               return <Col md={8}>
                 <GenreView
                   genre={match.params.name}
@@ -154,6 +156,7 @@ export default class MainView extends React.Component {
 
             {/* DIRECTORS VIEW */}
             <Route exact path="/directors/:name" render={({ match, history }) => {
+              if (movies.length === 0) return <div className="main-view" />
               return <Col md={8}>
                 <DirectorView
                   director={movies && movies.find(m => m.director.name === match.params.name).director}
@@ -163,22 +166,23 @@ export default class MainView extends React.Component {
 
             {/* LOGIN VIEW */}
             <Route exact path="/log-in" render={() => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
               return <Col md={9}>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
             }} />
 
             {/* REGISTRATION VIEW */}
-            <Route exact path="/register" render={({ match }) => {
-              return <Col md={9}>
-                <RegisterView />
-              </Col>
+            <Route path="/register" render={() => {
+              if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)} />
             }} />
-
             {/* PROFILE VIEW */}
-            <Route exact path="/profile" render={({ match }) => {
+            <Route exact path="/profile" render={({ }) => {
               return <Col md={9}>
-                <ProfileView profile={users.find(u => u._id === match.params.userId)} />
+                {/* key={value} */}
+                <ProfileView movies={movies} />
               </Col>
             }} />
           </Row>
