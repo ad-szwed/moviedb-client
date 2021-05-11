@@ -11,7 +11,7 @@ export default class GenreView extends React.Component {
   }
 
   render() {
-    const { genre } = this.props;
+    const { genre, onBackClick } = this.props;
     console.log(genre);
     if (!genre) return null;
 
@@ -20,12 +20,10 @@ export default class GenreView extends React.Component {
         <Container>
           <Card className='director-card'>
             <Card.Body>
-              <Card.Title className='director-name'>Name:{genre}</Card.Title>
+              <Card.Title className='director-name'>Name: {genre}</Card.Title>
             </Card.Body>
           </Card>
-          <Button variant="primary" onClick={() => {
-            onBackClick();
-          }}>Back</Button>
+          <Button variant="primary" onClick={() => onBackClick()}>Back</Button>
         </Container>
       </div>
     )
