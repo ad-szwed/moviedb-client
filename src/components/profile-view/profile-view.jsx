@@ -43,7 +43,6 @@ export default class ProfileView extends React.Component {
           birthday: response.data.birthday,
           favouriteMovies: response.data.favouriteMovies,
         });
-        console.log(response, "!!response")
       })
       .catch(function (error) {
         console.log(error, "getUser error");
@@ -170,10 +169,8 @@ export default class ProfileView extends React.Component {
 
   render() {
     const { favouriteMovies, validated } = this.state;
-    const username = localStorage.getItem('user');
     const { movies } = this.props;
-    const favorites = movies.filter(movie => favouriteMovies.indexOf(movie._id) > -1)
-    console.log(favorites, "!!favs")
+    const favourites = movies.filter(movie => favouriteMovies.indexOf(movie._id) > -1)
 
     return (
       <Container className='profile-view'>
@@ -184,7 +181,7 @@ export default class ProfileView extends React.Component {
           {/* {favoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>} */}
           <div className='favorites-container'>
             {favouriteMovies.length > 0 &&
-              favorites.map(m => (
+              favourites.map(m => (
                 <div>
                   <Link key={m._id} to={`/movies/${m._id}`}>
                     <Button variant="link">{m.title}</Button>
@@ -199,20 +196,17 @@ export default class ProfileView extends React.Component {
         </Card>
 
         <Card className='update-card' border='info'>
-          <Card.Title className='profile-title'>Update Profile</Card.Title>
-          <Card.Subtitle className='card-subtitle-update'>If you are not updating a certain field (ex; email), then leave that field empty.
-              <span className='password-instructions'>*You must enter in either a new or existing password to verify the change!</span>
-          </Card.Subtitle>
+          <Card.Title>Update Your Profile:</Card.Title>
           <Card.Body>
-            <Form noValidate validated={validated} className='update-form' onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
+            <Form noValidate validated={validated} className='update-form' onSubmit={(e) => this.handleUpdate(e, this.username, this.password, this.email, this.birthday)}>
               <Form.Group controlId='formBasicUsername'>
                 <Form.Label className='form-label'>Username</Form.Label>
-                <Form.Control type='text' placeholder='Change Username' onChange={(e) => this.setUsername(e.target.value)} pattern='[a-zA-Z0-9]{5,}' />
+                <Form.Control type='text' placeholder='Change Username' onChange={() => this.setUsername(e.target.value)} pattern='[a-zA-Z0-9]{5,}' />
                 <Form.Control.Feedback type='invalid'>Please enter a valid username with at least 5 alphanumeric characters.</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId='formBasicPassword'>
                 <Form.Label className='form-label'>
-                  Password <span className='required'>*</span>
+                  Password<span className='required szwed-shop'>*</span>
                 </Form.Label>
                 <Form.Control type='password' placeholder='Current or New Password' onChange={(e) => this.setPassword(e.target.value)} pattern='.{5,}' />
                 <Form.Control.Feedback type='invalid'>Please enter a valid password with at least 5 characters.</Form.Control.Feedback>
