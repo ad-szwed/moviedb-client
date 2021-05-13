@@ -100,10 +100,14 @@ export default class MainView extends React.Component {
             {/* PROFILE OPTIONS */}
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ml-auto">
-                <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
-                  <NavDropdown.Item href="/profile/">Profile view</NavDropdown.Item>
-                  <NavDropdown.Item href="/" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
-                </NavDropdown>
+
+                {/* condition to display profile option if there's user logged-in */}
+                {user ?
+                  <NavDropdown title="Profile" id="collasible-nav-dropdown" style={{ marginRight: 100 }}>
+                    <NavDropdown.Item href="/profile/">Profile view</NavDropdown.Item>
+                    <NavDropdown.Item href="/" onClick={() => { this.onLoggedOut() }}>Logout</NavDropdown.Item>
+                  </NavDropdown>
+                  : null}
               </Nav>
             </Navbar.Collapse>
           </Navbar>
