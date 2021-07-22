@@ -1,21 +1,28 @@
 import React from 'react';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import { setMovies } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
+
 import { Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import LoginView from '../login-view/login-view';
 import RegisterView from '../registration-view/registration-view';
-import MovieCard from '../movie-card/movie-card';
+// import MovieCard from '../movie-card/movie-card'; THAT ONE WILL BE MOVED TO MoviesList
 import MovieView from '../movie-view/movie-view';
 import DirectorView from '../director-view/director-view';
 import GenreView from '../genre-view/genre-view';
-import ProfileView from '../profile-view/profile-view'
+import ProfileView from '../profile-view/profile-view';
 
-import './main-view.scss'
+import './main-view.scss';
 
 // ONLY ONE DEFAULT EXPORT PER FILE!!!
-export default class MainView extends React.Component {
+// export default 
+class MainView extends React.Component {
 
   // we put our states inside a constructor()
   constructor() {
@@ -23,8 +30,8 @@ export default class MainView extends React.Component {
     // code executed right when the component is created in the memory, inheritance
     this.state = {
       // states are my variables
-      movies: [],
-      selectedMovie: null,
+      // movies: [],
+      // selectedMovie: null,
       user: null,
     };
   }
@@ -43,14 +50,11 @@ export default class MainView extends React.Component {
 
   // Retrieving movies from API
   getMovies(token) {
-    axios.get('https://szwedshop-moviedb.herokuapp.com/movies', {
+    axios.get('YOUR_API_URL/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -85,7 +89,8 @@ export default class MainView extends React.Component {
 
 
   render() {
-    const { movies, user, register } = this.state;
+    let { movies } = this.props;
+    let { user, register } = this.state;
 
     return (
       <React.Fragment>
@@ -116,19 +121,10 @@ export default class MainView extends React.Component {
 
             {/* MAIN SCREEN VIEW */}
             <Route exact path="/" render={() => {
-              if (!user) return <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-              </Col>
-              if (movies.length === 0) return <div className="main-view" />
-              return movies.map(movie => (
-                <Col xs={12} sm={6} md={4} lg={3} key={movie._id}>
-                  <MovieCard
-                    key={movie._id}
-                    movie={movie}
-                  />
-                </Col>
-              ))
-            }} />
+              if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              return (<MoviesList movies={movies} />);
+            }
+            } />
 
             {/* SPECIFIC MOVIE VIEW */}
             <Route exact path="/movies/:movieId" render={({ match }) => {
@@ -161,13 +157,10 @@ export default class MainView extends React.Component {
 
             {/* LOGIN VIEW */}
             <Route exact path="/log-in" render={() => {
-              if (!user) return <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-              </Col>
-              return <Col md={9}>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-              </Col>
-            }} />
+              if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              return (<MoviesList movies={movies} />);
+            }
+            } />
 
             {/* REGISTRATION VIEW */}
             <Route path="/register" render={() => {
@@ -194,3 +187,9 @@ export default class MainView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);
