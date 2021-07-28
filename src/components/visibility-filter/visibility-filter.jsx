@@ -5,7 +5,7 @@ import { Col, Form, Row, Button, Dropdown, DropdownButton, Container } from 'rea
 
 import { setFilter } from '../../actions/actions';
 
-function VisibilityFilterInput(props) {
+function VisibilityFilter(props) {
   return (
     <Container className='px-0 py-2'>
       <Row className='justify-content-center'>
@@ -24,4 +24,4 @@ function VisibilityFilterInput(props) {
 export default connect(
   null,
   { setFilter }
-)(VisibilityFilterInput);
+)(VisibilityFilter);
