@@ -6,8 +6,11 @@ import { Provider } from 'react-redux';
 import moviesApp from './reducers/reducers';
 import MainView from './components/main-view/main-view';
 
-// Import statement indicating the need of bundling ./index.scss
+import { devToolsEnhancer } from 'redux-devtools-extension';
+
 import './index.scss'
+
+const store = createStore(moviesApp, devToolsEnhancer());
 
 // Main component
 class movieDBapp extends React.Component {
