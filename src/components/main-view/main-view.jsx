@@ -29,8 +29,8 @@ class MainView extends React.Component {
     // code executed right when the component is created in the memory, inheritance
     this.state = {
       // states are my variables
-      // movies: [],
-      // selectedMovie: null,
+      movies: [],
+      selectedMovie: null,
       user: null,
     };
   }
@@ -49,7 +49,7 @@ class MainView extends React.Component {
 
   // Retrieving movies from API
   getMovies(token) {
-    axios.get('YOUR_API_URL/movies', {
+    axios.get('https://szwedshop-moviedb.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
