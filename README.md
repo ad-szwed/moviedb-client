@@ -1,4 +1,4 @@
-# movieDB API
+# movieDB API v1.0
 
 Backend of movieDB MERN stack app, a RESTful API that provides information about movies, directors, and genres from Mongo db
 
