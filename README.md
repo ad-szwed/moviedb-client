@@ -1,4 +1,4 @@
-# myFlix v1.0
+# movieDB v1.0
 
 myFlix is the client-side of a movie database application built using React with existing server-side (REST API) and MongoDB database. 
 
