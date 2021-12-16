@@ -1,32 +1,44 @@
-# movieDB API v1.0
+# myFlix v1.0
 
-Backend of movieDB MERN stack app, a RESTful API that provides information about movies, directors, and genres from Mongo db
+myFlix is the client-side of a movie database application built using React with existing server-side (REST API) and MongoDB database. 
 
-Find the React client repo [here](https://github.com/ad-szwed/moviedb-client)
+This web application provides users with the access to information about different movies, directors and genres. Users are able to sign up, update personal information, and create a list of their favorite movies. 
 
-Find the Angular client repo [here](https://github.com/ad-szwed/movie-db-angular)
+Find the API repo [here](https://github.com/ad-szwed/moviedb).
+
+### Install dependencies 
+```
+npm install
+```
+
+### Build for development
+```
+parcel [path to index.html] 
+```
+*By default path to index.html is 'src/index.html'*
+```
+parcel src/index.html
+```
+
+**Note:** If you do not have parcel installed globally, your terminal will tell you that the command 'parcel' is not found. If this is the case, simply follow the instructions on [how to install parcel.js](https://parceljs.org/getting_started.html)
+
+### Run application in browser
+Parcel will run a local server on port: 1234
+
+Open the application in your browser
+``` 
+http://localhost:1234/
+```
+
+---
 
 ## Features
 
-- Return a list of ALL movies to the user
-- Return data (description, genre, director, image URL) about a single movie by title to the user
-- Return data about a genre by name/title (e.g., “Thriller”)
-- Return data about a director (bio, birth year, death year) by name
-- Allow new users to register
-- Allow users to update their user info (username, password, email, date of birth)
-- Allow users to add a movie to their list of favorites
-- Allow users to remove a movie from their list of favorites
-- Allow existing users to deregister
-
-## Core Back-End Technologies
-
-- MongoDB
-- Express.js
-- Node.js
-- Mongoose
-- Heroku
-- NPM
-
-## Authentication
-
-The app uses JWT (token-based) authentication with the help of passport.js.
+- Allows users to see a list of all movies in the database
+- Allows users to see a fliter list of all movies in the database by title
+- Allows users to get detailed information about a single movie by movie title
+- Allows users to get detailed information about a genre by genre name
+- Allows users to get detailed information about a director by name
+- Allows new users to create an user account
+- Allows existing users to update their user info or to delete their account
+- Allows existing users to add or remove movies to/from their list of favorites
