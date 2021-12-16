@@ -10,7 +10,6 @@ Find the API repo [here](https://github.com/ad-szwed/moviedb).
 ```
 npm install
 ```
-
 ### Build for development
 ```
 parcel [path to index.html] 
